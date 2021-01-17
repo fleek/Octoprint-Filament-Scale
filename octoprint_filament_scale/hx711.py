@@ -23,7 +23,7 @@ class HX711:
 		self.REFERENCE_UNIT = 1	 # The value returned by the hx711 that corresponds to your reference unit AFTER dividing by the SCALE.
 		
 		self.OFFSET = 1
-		self.lastVal = long(0)
+		self.lastVal = int(0)  # UPDATED was long(0)
 
 		self.LSByte = [2, -1, -1]
 		self.MSByte = [0, 3, 1]
@@ -95,13 +95,13 @@ class HX711:
 		
 		self.lastVal = np_arr32
 
-		return long(self.lastVal)
+		return int(self.lastVal) # UPDATED as long(self.lastVal)
 		
 
 	def read_average(self, times=3):
 		
 
-		values = long(0)
+		values = int(0) # UPDATED was long(0)
 		for i in range(times):
 			values += self.read()
 
@@ -122,7 +122,7 @@ class HX711:
 		self.set_reference_unit(1)
 
 		value = self.read_average(times)
-		print value
+		print value  # UPDATED  was (value)
 		self.set_offset(value)
 
 		self.set_reference_unit(reference_unit)

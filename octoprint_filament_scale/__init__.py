@@ -25,10 +25,11 @@ class Filament_scalePlugin(octoprint.plugin.SettingsPlugin,
 			tare = 8430152,
 			reference_unit=-411,
 			spool_weight=200,
-			clockpin=21,
-			datapin=20,
+			clockpin=40,
+			datapin=38,
 			lastknownweight=0
 			
+			# UPDATED changed clockpin from 21 to 40, datapin from 20 to 38
 			# put your plugin's default settings here
 		)
 
@@ -45,7 +46,7 @@ class Filament_scalePlugin(octoprint.plugin.SettingsPlugin,
 
 	
 	def on_startup(self, host, port):
-		self.hx = HX711(20, 21)
+		self.hx = HX711(38, 40)  # UPDATED was (20,21)
 		self.hx.set_reading_format("LSB", "MSB") 
 		self.hx.reset()
 		self.hx.power_up()
@@ -83,6 +84,7 @@ class Filament_scalePlugin(octoprint.plugin.SettingsPlugin,
 # ("OctoPrint-PluginSkeleton"), you may define that here. Same goes for the other metadata derived from setup.py that
 # can be overwritten via __plugin_xyz__ control properties. See the documentation for that.
 __plugin_name__ = "Filament Scale"
+__plugin_pythoncompat__ = ">=2.7,<4" # UPDATED added from comment : https://github.com/dieki-n/Octoprint-Filament-Scale/issues/12#issuecomment-728385562
 
 def __plugin_load__():
 	global __plugin_implementation__
@@ -92,4 +94,3 @@ def __plugin_load__():
 	__plugin_hooks__ = {
 		"octoprint.plugin5.softwareupdate.check_config": __plugin_implementation__.get_update_information
 	}
-
