@@ -25,8 +25,8 @@ class Filament_scalePlugin(octoprint.plugin.SettingsPlugin,
 			tare = 8430152,
 			reference_unit=-411,
 			spool_weight=200,
-			clockpin=21,
-			datapin=20,
+			clockpin=3,
+			datapin=2,
 			lastknownweight=0
 			
 			# put your plugin's default settings here
@@ -45,7 +45,7 @@ class Filament_scalePlugin(octoprint.plugin.SettingsPlugin,
 
 	
 	def on_startup(self, host, port):
-		self.hx = HX711(20, 21)
+		self.hx = HX711(2, 3)
 		self.hx.set_reading_format("LSB", "MSB") 
 		self.hx.reset()
 		self.hx.power_up()
